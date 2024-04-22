@@ -10,7 +10,6 @@ def __init__(self,xcant):
 
 def Acumular(self, ns, nd, importe):
     self.__ventas[ns][nd] += importe
-    return importe
 
 def Calcula(self, ns):
     total = 0
