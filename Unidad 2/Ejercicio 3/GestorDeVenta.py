@@ -1,8 +1,9 @@
 class GestorDeVenta:
     __cantDias = 7
-    __cantFarmacias = 5
-    __ventas = list [0]
-def __init__(self,):
+    __cantFarmacias: int
+    __ventas = list
+def __init__(self,xcant):
+    self.__cantFarmacias = xcant
     for i in range (self.__cantFarmacias):
         self.__ventas.append([0]*self.__cantDias)
 
