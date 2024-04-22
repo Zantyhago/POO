@@ -4,11 +4,13 @@ class GestorDeVenta:
     __ventas = list
 def __init__(self,xcant):
     self.__cantFarmacias = xcant
+    self.__ventas = []
     for i in range (self.__cantFarmacias):
         self.__ventas.append([0]*self.__cantDias)
 
 def Acumular(self, ns, nd, importe):
     self.__ventas[ns][nd] += importe
+    return importe
 
 def Calcula(self, ns):
     total = 0
