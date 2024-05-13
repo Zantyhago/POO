@@ -26,7 +26,8 @@ def __init__(self):
         bandera = True
         i = 0
         while i < len(self.__lista) and bandera:
-            if :
+            if xdni == self.__lostaCli[i].getdni and bandera:
+                    
             
     def buscacli(xdni):
             i = 0
