@@ -6,19 +6,24 @@ class Cliente:
     __numacc: int
     __saldoant: float
 
-def __init__(self):
+    def __init__(self, xnom, xapell, xdni, xnacc, xsaldoant):
+        self.__nombre = xnom
+        self.__apellido = xapell
+        self.__dni = xdni
+        self.__numacc = xnacc
+        self.__saldoant = xsaldoant
 
-def getname(self):
-    return self.__nombre
+    def getname(self):
+        return self.__nombre
 
-def getsurname(self):
-    return self.__apellido
+    def getsurname(self):
+        return self.__apellido
 
-def getdni(self):
-    return self.__dni
+    def getdni(self):
+        return self.__dni
 
-def getnum(self):
-    return self.__numacc
+    def getnumacc(self):
+        return self.__numacc
 
-def getsaldo(self):
-    return self.__saldoant
+    def getsaldo(self):
+        return self.__saldoant
