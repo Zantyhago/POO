@@ -34,7 +34,7 @@ class GestorCliente:
                 bandera = False
             else:
                 i += 1
-        return xapell, xnom, xnum, xsaldo
+        return xapell, xnom, xnum, xsaldo # apell, nomb, numacc, saldAnt
             
     def buscacli(self, xdni):
         i = 0

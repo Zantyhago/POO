@@ -9,9 +9,15 @@ if __name__ == '__main__':
         if opcion == 'a':
             xdni = input("Ingrese DNI: ")
             apell, nomb, numacc, saldAnt = gestCli.buscasaldOld(xdni)
-            fecha, descr, imp, type = gestMov.actualiza(numacc)
-            print("Cliente: {} {}{10}{}".format(apell, nomb, numacc))
-            print("Movimientos:\n")
+            print(f"""
+                    Cliente: {apell} {nomb}           Numero de Cuenta: {numacc}
+                    Saldo Anterior: {saldAnt}
+                    Movimientos
+                    Fecha           Descripcion             Importe         Tipo De Movimiento""")
+            fecha, descr, imp, type = gestMov.actualiza(numacc, saldAnt)
+            print(f"""
+                    {fecha}         {descr}                 {imp}           {type}
+                    Saldo Actualizado: {saldAnt}""")
         elif opcion == 'b':
             xdni = input("Ingrese DNI: ")
             apell, nomb, numacc = gestCli.buscacli(xdni)
