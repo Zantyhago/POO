@@ -27,8 +27,20 @@ class GestorMovimiento:
                 self.agregar(nuevoMov)
         archivo.close()
 
-    def actualiza(self, saldoant, tipo):
-        pass
+    def actualiza(self, xnum, xsaldoant):
+        i = 0
+        while i < len(self.__listaMov):
+            if xnum == self.__listaMov[i].getnumacc():
+                fecha = self.__listaMov[i].getfecha()
+                descr = self.__listaMov[i].getdescr()
+                imp = self.__listaMov[i].getimp()
+                type = self.__listaMov[i].gettipomov()
+                if type == 'C':
+                    xsaldoant += imp
+                elif type == 'P':
+                    xsaldoant -= imp
+        return fecha, descr, imp, type                
+
     def buscarmov(self, xnum):
         i = 0
         bandera = False

@@ -4,11 +4,12 @@ from gestormovimientos import GestorMovimiento
 if __name__ == '__main__':
     gestMov = GestorMovimiento
     gestCli = GestorCliente
-    opcion = input("Seleccione una opcion:\na: Actualizar saldo.\nb: Mostrar movomientos.\nc: Ordenar movimientos.\nd: Salir.")
+    opcion = input("Seleccione una opcion:\na: Actualizar saldo.\nb: Mostrar movomientos.\nc: Ordenar movimientos.\nd: Salir.\n")
     while opcion != 'd':
         if opcion == 'a':
             xdni = input("Ingrese DNI: ")
-            apell, nomb, numacc, saldAnt, fecha, descr, imp, type  = gestMov.actualiza(xdni)
+            apell, nomb, numacc, saldAnt = gestCli.buscasaldOld(xdni)
+            fecha, descr, imp, type = gestMov.actualiza(numacc)
             print("Cliente: {} {}{10}{}".format(apell, nomb, numacc))
             print("Movimientos:\n")
         elif opcion == 'b':
@@ -27,5 +28,6 @@ if __name__ == '__main__':
                 gestMov.muestra()
         else:
              print("Dale amigo no es tan dificil.")
+             opcion = 'd'
 
     print("See u next time (ojalá no en el extracoso)")
