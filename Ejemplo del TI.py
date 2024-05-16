@@ -34,11 +34,11 @@ class Empleado:
 
 def main():
     # crear instancia de empleados
-    emp1 = Empleado("Perez","Juan",40,20000,"Juan Jose Paso 350 (o)")
-    emp2 = Empleado("Gonzales","Mateo",32,30000,"Sarmiento 547 (s)")
+    emp1 = Empleado("Sánchez","Santiago",23,20000,"Juan Jose Paso 350 (o)")
+    emp2 = Empleado("Farfi","Franco",25,30000,"Sarmiento 547 (s)")
     emp3 = Empleado("Lin","Daniel",23,50000,"General Acha 320 (s)")
-    emp4 = Empleado("Benavidez","Geronimo",35,60000,"Av. España 3358 (n)")
-    emp5 = Empleado("Disalvio","Martin",30,32000,"Av. Libertador 126 (o)")
+    emp4 = Empleado("Benavides","Gerónimo",35,60000,"Av. España 3358 (n)")
+    emp5 = Empleado("Disalvo","Martin",32,32000,"Av. Libertador 126 (o)")
 
     # crear arreglo numpy de empleados
     arreglo_emp = np.array([emp1,emp2,emp3,emp4,emp5])
