@@ -6,6 +6,7 @@ class Edificio:
     __nombEmpre: str
     __cantPisos: int
     __cantDepas: int
+    __listaDepas: list
 
     def __init__(self, xid, xnom, xdir, xnomProp, xcantPis, xcantDep):
         self.__id = xid
@@ -14,10 +15,16 @@ class Edificio:
         self.__nombEmpre = xnomProp
         self.__cantPisos = xcantPis
         self.__cantDepas = xcantDep
+        self.__listaDepas = []
 
-    def agregarDepartamento(self, yid, ynya, ynumdepa, ycantHab, ycantBañ, ysup):
-        xdemartamento = demartamento(yid, ynya, ynroP, ynroD, ycantD, ycantB, ysup)
-        self.__Departamentos.append(xdemartamento)
+    def agregarDepa(self, yid, ynya, ynumpiso, ynumdepa, ycantHab, ycantBañ, ysup):
+        xdepartamento = Departamento(yid, ynya, ynumpiso, ynumdepa, ycantHab, ycantBañ, ysup)
+        self.__listaDepas.append(xdepartamento)
+
+    def muestraPropsDepas(self):
+        print("Departametos y sus Dueños:")
+        for depa in self.__listaDepas:
+            print(f"ID del Departamento: {depa.getID()}, Nombre propietario: {depa.getNyA()}")
 
     def getID(self):
         return self.__id
