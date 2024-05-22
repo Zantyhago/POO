@@ -34,5 +34,5 @@ class GestorCabaña:
     def buscaCabañasDispos(self, GR):
         cant = int(input("Ingrese cantidad de huéspedes: "))
         for fila in self.__listCabañas:
-            if fila <= cant and GR.buscaReserva(fila.getNum) is false:
+            if fila <= cant and GR.buscaReserva(fila.getNumR) is false:
                   
