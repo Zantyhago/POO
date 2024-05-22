@@ -22,7 +22,7 @@ class GestorReserva:
 
       def buscaReserva(self, xnumR):
            bandera = False
-           while i < len(self.__listaReservas) and bandera is false:
+           while i < len(self.__listaReservas) and bandera is False:
                if self,__listaReservas[i].getNumR() == xnumR:
                      bandera = True
            return bandera
