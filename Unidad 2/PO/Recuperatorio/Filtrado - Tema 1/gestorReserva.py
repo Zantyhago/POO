@@ -19,3 +19,11 @@ class GestorReserva:
             else:
                 self.agregarReserva(Reserva(int(fila[0]), fila[1], int(fila[2]), fila[3], int(fila[4]), int(fila[5]), float(fila[6])))
         archivo.close()
+
+      def buscaReserva(self, xnumR):
+           bandera = False
+           while i < len(self.__listaReservas) and bandera is false:
+               if self,__listaReservas[i].getNumR() == xnumR:
+                     bandera = True
+           return bandera
+              
