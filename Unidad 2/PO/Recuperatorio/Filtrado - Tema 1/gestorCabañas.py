@@ -33,6 +33,21 @@ class GestorCabaña:
 
     def buscaCabañasDispos(self, GR):
         cant = int(input("Ingrese cantidad de huéspedes: "))
-        for fila in self.__listCabañas:
-            if fila <= cant and GR.buscaReserva(fila.getNumR) is false:
-                  
+        i = 0
+        while i in len(self.__listCabañas):
+            bandera = False
+            if self.__listCabañas[i] >= cant and GR.buscaReserva(self.__listCabañas[i].getNumR) is False:
+                  print(f"La cabaña {self.__listCabañas[i].getNumR()} está disponible para {cant} huéspedes.")
+                  bandera = True
+        if bandera == False:
+            print(f"No hay cabañas disponibles para {cant} huéspedes.")
+
+    def buscaImporteDiario(self, xnum):
+        i = 0
+        bandera = True
+        while i < len(self.__listCabañas[i].getImporte) and bandera:
+            if self.__listCabañas == xnum:
+                bandera = False
+            else:
+                i += 1
+        return self.__listCabañas[i].getImporte()

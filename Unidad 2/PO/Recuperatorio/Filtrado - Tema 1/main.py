@@ -13,14 +13,14 @@ def menu():
 if __name__ == '__main__':
     GC = GestorCabaña
     GR = GestorReserva
-    GC.leedatos()
-    GR.leedatos()
+    GC.leedatos
+    GR.leedatos
     opcion = menu
     while opcion != 0:
         if opcion == 1:
             GC.buscaCabañasDispos(GR)
         elif opcion == 2:
-            pass
+            GR.buscaFecha(GC)
         else:
-            print("Opcion inválida, Dale amigo no cuesta tanto.")
+            print("Opcion inválida. Dale amigo no cuesta tanto.")
             opcion = menu()
