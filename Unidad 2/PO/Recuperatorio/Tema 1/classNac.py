@@ -32,5 +32,4 @@ class Nacimiento:
         return self.__altura
     
     def __eq__(self, unaMama):
-        DNI = self.getDNIMama
-        return DNI == unaMama.getDNI
+        return self.getDNIMama == unaMama.getDNI
