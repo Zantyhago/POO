@@ -10,10 +10,10 @@ def menu():
     return op
     
 if __name__ == '__main__':
-    GM = GestorMama
-    GN = GestorNacimiento
-    GM.leerdatos
-    GN.leerdatos
+    GM = GestorMama()
+    GN = GestorNacimiento()
+    GM.leerdatos()
+    GN.leerdatos()
     opcion = menu()
     while opcion != 3:
         if opcion == 1:
