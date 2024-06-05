@@ -48,6 +48,10 @@ class GestorProducto:
                 xporcN = float(input("Ingrese porcentaje de Nitrogeno: "))
                 xporcO = float(input("Ingrese porcentaje de Oxigeno: "))
                 xporcCO = float(input("Ingrese porcentaje de Dioxido de Carbono: "))
+                xporcVap = float(input("Ingrese porcentaje de vapor de agua: "))
                 xmetodo = input("Ingrese metodo de congelacion: ")
-                pechi = (Congelado(xnom, xfechaE, xfechaV, xtemp, xpais, xnum, xcostoBase, xporcN, xporcO, xporcCO, xmetodo, fila[12]))
-
+                pechi = (Congelado(xnom, xfechaE, xfechaV, xtemp, xpais, xnum, xcostoBase, xporcN, xporcO, xporcCO, xporcVap, xmetodo))
+            elif xtipo.lower == 'r':
+                
+                refri = (Refrigerado(xnom, xfechaE, xfechaV, xtemp, xpais, xnum, xcostoBase, xporcN, xporcO, xporcCO, xporcVap, xmetodo))
+                
