@@ -32,3 +32,6 @@ class GestorProducto:
                 print('Se leyo un producto de tipo desconocido.')
             else: print('Se leyo "productos.csv" correctamente.')
         archivo.close()
+    
+    def leeDatosManu(self):
+        
