@@ -26,6 +26,9 @@ class GestorProducto:
                     self.agregaProducto(refrigerado)
                 else:
                     raise AssertionError
-            assert
-        finally:
+            except FileNotFoundError as e:
+                print(e)
+            except AssertionError:
+                print('Se leyo un producto de tipo desconocido.')
+            else: print('Se leyo "productos.csv" correctamente.')
         archivo.close()
