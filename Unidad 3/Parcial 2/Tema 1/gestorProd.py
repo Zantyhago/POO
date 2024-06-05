@@ -34,4 +34,20 @@ class GestorProducto:
         archivo.close()
     
     def leeDatosManu(self):
-        
+        xtipo = input("Ingrese tipo del producto (R - C): ")
+        assert len(xtipo) == 1, "El tipo se indica con caracter."
+        xnom = input("Ingrese nombre del producto: ")
+        xfechaE = input("Ingrese fecha de envase: ")
+        xfechaV = input("Ingrese fecha de vencimiento: ")
+        xtemp = float(input("Ingrese temperatura: "))
+        xpais = input("Ingrese pais de origen: ")
+        xnum = input("Ingrese numero de serie: ")
+        xcostoBase = float(input("Ingrese costo base: "))
+        try:
+            if xtipo.lower == 'c':
+                xporcN = float(input("Ingrese porcentaje de Nitrogeno: "))
+                xporcO = float(input("Ingrese porcentaje de Oxigeno: "))
+                xporcCO = float(input("Ingrese porcentaje de Dioxido de Carbono: "))
+                xmetodo = input("Ingrese metodo de congelacion: ")
+                pechi = (Congelado(xnom, xfechaE, xfechaV, xtemp, xpais, xnum, xcostoBase, xporcN, xporcO, xporcCO, xmetodo, fila[12]))
+
