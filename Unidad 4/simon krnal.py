@@ -72,13 +72,13 @@ class Aplicacion:
     def gameover(self):
         #for boton in self.__listaBotones:            
         self.__Verdebtn.unbind("<Button-1>")
-        self.__Amarillobtn.unbind("<Button-1>")         # todos los botones se desvinculan del evento Click para que dejen de sumar después de haber perdido
+        self.__Amarillobtn.unbind("<Button-1>")         # se desvinculan del evento Click para que dejen de sumar en el json después de haber perdido
         self.__Rojobtn.unbind("<Button-1>")
         self.__Azulbtn.unbind("<Button-1>")
         if self.__puntaje > self.__mayorPtn:          # si hace récord se actualiza
             self.__mayorPtn = self.__puntaje
         self.__texto.config(text = "Puntaje                         " + str(self.__puntaje), font = ('Arial', 15))
-        self.__ventanaGameOver = Toplevel(self.__ventana)
+        self.__ventanaGameOver = Toplevel(self.__ventana)    # crea una ventana hija
         self.__ventanaGameOver.title("Py-SimonGame")
         self.__ventanaGameOver.geometry('350x175')
         self.__textoLoose = Label(self.__ventanaGameOver, text=f"\nGAME OVER")
@@ -86,10 +86,10 @@ class Aplicacion:
         points = Label(self.__ventanaGameOver, text=f"\nPuntaje: {self.__marcador}")
         points.pack(pady = 10, padx = 10)
         self.__Quitbtn = Button(self.__ventanaGameOver, command = quit, bg = "white", text = "Salir", font = ('Arial', 6))
-        self.__Quitbtn.place(relx = 0.5, rely = 0.53, anchor = tk.CENTER, relwidth = 0.2, relheight = 0.1)                                         # TERMINAR DE CONFIGURAR
+        self.__Quitbtn.place(relx = 0.5, rely = 0.53, anchor = tk.CENTER, relwidth = 0.2, relheight = 0.1)                                         # TERMINAR DE CONFIGURAR EL PLACE
         self.__Reiniciarbtn = Button(self.__ventanaGameOver, command = self.iniciar, bg = "white", text = "Reintentar", font = ('Arial', 6))
         self.__Reiniciarbtn.place(relx = 0.5, rely = 0.53, anchor = tk.CENTER, relwidth = 0.2, relheight = 0.1)
-                    # TERMINAR DE CONFIGURAR
+                    # TERMINAR DE CONFIGURAR EL PLACE
 
     def iniciar(self):
         self.__contador = 0
