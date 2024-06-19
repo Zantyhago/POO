@@ -72,7 +72,7 @@ class Aplicacion:
     def gameover(self):
         #for boton in self.__listaBotones:            
         self.__Verdebtn.unbind("<Button-1>")
-        self.__Amarillobtn.unbind("<Button-1>")         # se desvinculan del evento Click para que dejen de sumar en el json después de haber perdido
+        self.__Amarillobtn.unbind("<Button-1>")         # se desvinculan del evento Click para que dejen de sumar en el json
         self.__Rojobtn.unbind("<Button-1>")
         self.__Azulbtn.unbind("<Button-1>")
         if self.__puntaje > self.__mayorPtn:          # si hace récord se actualiza
