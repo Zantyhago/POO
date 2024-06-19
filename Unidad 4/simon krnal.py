@@ -4,8 +4,8 @@ from tkinter import ttk, messagebox
 from functools import partial
 import random
 import time
-from datetime import datetime
 import json
+from datetime import datetime
 
 class Aplicacion:
     __ventana: object
@@ -14,6 +14,7 @@ class Aplicacion:
     __mayorPtn: int
     __contador: int
     __jinicial: bool
+    # __listaBotones: list
     __colours: list
     __Verdebtn: object
     __Amarillobtn: object
@@ -21,14 +22,19 @@ class Aplicacion:
     __Azulbtn: object
     __Iniciarbtn: object
     __texto: object
+    __textoLoose: object
+    __Quitbtn: object
+    __Reiniciarbtn: object
 
     def __init__(self):
         self.__ventana = tk.Tk()
+        self.__ventanaGameOver = tk.Tk()
         self.__secuencia = []
         self.__marcador = 0
         self.__mayorPtn = 0
         self.__contador = 0
         self.__jinicial = False
+        # self.__listaBotones = [self.__Verdebtn, self.__Amarillobtn, self.__Rojobtn, self.__Azulbtn]
         self.__colours = ['#00DD00','#FFFF00','#FF0000','#0000FF'] # en el mismo orden; verde, amarillo,rojo, azul
         self.__ventana.title("Py-SimonGame")
         self.__ventana.geometry("350x550")
@@ -53,20 +59,52 @@ class Aplicacion:
         self.__texto = Label(self.__ventana, text = "Puntaje                         0", font = ('Arial', 15))
         self.__texto.place(relx= 0.5, rely = 0.01,anchor = tk.N)
 
-    def press(self):
-        pass
-    
+    def press(self, xcolorPresionado):
+        if self.__jinicial == True:     # verifica que el juego inició
+            if self.__secuencia >= self.__contador:     # el contador va una posicion adelantada
+                if self.__secuencia[self.__contador] == xcolorPresionado:
+                    self.__puntaje +=  1
+                    self.checkeaTurno()
+                    self.__texto.config(text = "Puntaje                         " + str(self.__puntaje), font = ('Arial', 15))
+                else:
+                    self.gameover()
+
+    def gameover(self):
+        #for boton in self.__listaBotones:            
+        self.__Verdebtn.unbind("<Button-1>")
+        self.__Amarillobtn.unbind("<Button-1>")         # todos los botones se desvinculan del evento Click para que dejen de sumar después de haber perdido
+        self.__Rojobtn.unbind("<Button-1>")
+        self.__Azulbtn.unbind("<Button-1>")
+        if self.__puntaje > self.__mayorPtn:          # si hace récord se actualiza
+            self.__mayorPtn = self.__puntaje
+        self.__texto.config(text = "Puntaje                         " + str(self.__puntaje), font = ('Arial', 15))
+        self.__ventanaGameOver = Toplevel(self.__ventana)
+        self.__ventanaGameOver.title("Py-SimonGame")
+        self.__ventanaGameOver.geometry('350x175')
+        self.__textoLoose = Label(self.__ventanaGameOver, text=f"\nGAME OVER")
+        self.__textoLoose.pack(pady = 20, padx = 20)
+        points = Label(self.__ventanaGameOver, text=f"\nPuntaje: {self.__marcador}")
+        points.pack(pady = 10, padx = 10)
+        self.__Quitbtn = Button(self.__ventanaGameOver, command = quit, bg = "white", text = "Salir", font = ('Arial', 6))
+        self.__Quitbtn.place(relx = 0.5, rely = 0.53, anchor = tk.CENTER, relwidth = 0.2, relheight = 0.1)                                         # TERMINAR DE CONFIGURAR
+        self.__Reiniciarbtn = Button(self.__ventanaGameOver, command = self.iniciar, bg = "white", text = "Reintentar", font = ('Arial', 6))
+        self.__Reiniciarbtn.place(relx = 0.5, rely = 0.53, anchor = tk.CENTER, relwidth = 0.2, relheight = 0.1)
+                    # TERMINAR DE CONFIGURAR
+
     def iniciar(self):
         self.__contador = 0
-        self.__marcador = 0
+        self.__puntaje = 0
         self.__secuencia = []
         self.__jinicial = True
-        self.__texto.config(text = "Puntaje                         " + str(self.__marcador), font = ('Arial', 15))
+        self.__texto.config(text = "Puntaje                         " + str(self.__puntaje), font = ('Arial', 15))
         self.createColor()
         self.__Iniciarbtn.destroy()
 
     def checkeaTurno(self):
-        pass
+        if len(self.__secuencia) == self.__puntaje:
+            self.__contador = 0
+            self.__puntaje += 1
+            self.__Iniciarbtn.after(1000, self.createColor)
 
     def createColor(self):
         pass
