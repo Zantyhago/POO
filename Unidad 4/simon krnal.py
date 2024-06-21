@@ -29,11 +29,11 @@ class Aplicacion:
     def __init__(self):
         self.__ventana = tk.Tk()
         self.__secuencia = []
-        self.__marcador = 0
+        self.__puntaje = 0
         self.__mayorPtn = 0
         self.__contador = 0
         self.__jinicial = False
-        # self.__listaBotones = [self.__Verdebtn, self.__Amarillobtn, self.__Rojobtn, self.__Azulbtn]
+        #self.__listaBotones = [self.__Verdebtn, self.__Amarillobtn, self.__Rojobtn, self.__Azulbtn]
         self.__colours = ["Verde", "Amarillo", "Rojo", "Azul"]
         self.__ventana.title("Py-SimonGame")
         self.__ventana.geometry("350x550")
@@ -41,13 +41,17 @@ class Aplicacion:
         self.__ventana.mainloop()
 
     def LauncherBotons(self):
-        self.__Verdebtn = Button(self.__ventana, command = partial(self.press, "Verde"), background = '#00DD00', relief = "raised")
+        self.__Verdebtn = tk.Canvas(self.__ventana, width=230, height=300, bg = "#00DD00")
+        self.__Verdebtn.bind("<Button-1>", lambda event: self.press("Verde"))
         self.__Verdebtn.place(relx = 0.265, rely = 0.3, anchor = tk.CENTER, relwidth = 0.43, relheight = 0.43)
-        self.__Amarillobtn = Button(self.__ventana, command = partial(self.press, "Amarillo"), background = '#FFFF00', relief = "raised")
+        self.__Amarillobtn = tk.Canvas(self.__ventana, width=230, height=300, bg = "#FFFF00")
+        self.__Amarillobtn.bind("<Button-1>", lambda event: self.press("Amarillo"))
         self.__Amarillobtn.place(relx = 0.265, rely = 0.75, anchor = tk.CENTER, relwidth = 0.43, relheight = 0.43)
-        self.__Rojobtn = Button(self.__ventana, command = partial(self.press, "Rojo"), background = '#FF0000', relief = "raised")
+        self.__Rojobtn = tk.Canvas(self.__ventana, width=230, height=300, bg = "#FF0000")
+        self.__Rojobtn.bind("<Button-1>", lambda event: self.press("Rojo"))
         self.__Rojobtn.place(relx = 0.735, rely = 0.3, anchor = tk.CENTER, relwidth = 0.43, relheight = 0.43)
-        self.__Azulbtn = Button(self.__ventana, command = partial(self.press, "Azul"), background = '#0000FF', relief = "raised")
+        self.__Azulbtn = tk.Canvas(self.__ventana, width=230, height=300, bg = "#0000FF")
+        self.__Azulbtn.bind("<Button-1>", lambda event: self.press("Azul"))
         self.__Azulbtn.place(relx = 0.735, rely = 0.75, anchor = tk.CENTER, relwidth = 0.43, relheight = 0.43)
         self.__ventana.grid_rowconfigure(1, weight = 1)
         self.__ventana.grid_rowconfigure(2, weight = 1)       # para que el contenido se adapte al tamaño de la ventana
@@ -58,6 +62,45 @@ class Aplicacion:
         self.__texto = Label(self.__ventana, text = "Puntaje                         0", font = ('Arial', 15))
         self.__texto.place(relx= 0.5, rely = 0.01,anchor = tk.N)
 
+    def iniciar(self):
+        self.__contador = 0
+        self.__puntaje = 0
+        self.__secuencia = []
+        self.__jinicial = True
+        self.__texto.config(text = "Puntaje                         " + str(self.__puntaje), font = ('Arial', 15))
+        self.__Iniciarbtn.destroy()
+        self.createColor()
+
+    def createColor(self):
+        if self.__jinicial == True:
+            i = 0
+            while i < len(self.__secuencia):
+                messagebox.showinfo("damn","funca el while")
+                if self.__secuencia[i] == "Verde":
+                    self.cambioColor(self.__Verdebtn, "pink", "#00DD00")
+                elif self.__secuencia[i] == "Amarillo":
+                    self.cambioColor(self.__Amarillobtn, "pink", "#FFFF00")
+                elif self.__secuencia[i] == "Rojo":
+                    self.cambioColor(self.__Rojobtn, "pink", "#FF0000")
+                elif self.__secuencia[i] == "Azul":
+                    self.cambioColor(self.__Azulbtn, "pink", "#0000FF")
+                i += 1
+                time.sleep(0.1)
+            xnum = random.randrange(0,4)
+            self.__secuencia.append(self.__colours[xnum])
+            if self.__secuencia[i] == "Verde":
+                self.cambioColor(self.__Verdebtn, "pink", "#00DD00")
+            elif self.__secuencia[i] == "Amarillo":
+                self.cambioColor(self.__Amarillobtn, "pink", "#FFFF00")
+            elif self.__secuencia[i] == "Rojo":
+                self.cambioColor(self.__Rojobtn, "pink", "#FF0000")
+            elif self.__secuencia[i] == "Azul":
+                self.cambioColor(self.__Azulbtn, "pink", "#0000FF")
+
+    def cambioColor(self, xboton, xcolorCamb, xcolorInic):
+        xboton.configure(bg = xcolorCamb)
+        xboton.after(500, partial(xboton.configure, bg = xcolorInic))
+
     def press(self, xcolorPresionado):
         if self.__jinicial == True:     # verifica que el juego inició
             if len(self.__secuencia) >= self.__contador - 1:     # el contador va una posicion adelantada
@@ -67,6 +110,12 @@ class Aplicacion:
                     self.__texto.config(text = "Puntaje                         " + str(self.__puntaje), font = ('Arial', 15))
                 else:
                     self.gameover()
+    
+    def checkeaTurno(self):
+        if len(self.__secuencia) == self.__contador:
+            self.__contador = 0
+            self.__puntaje += 1
+            self.__Iniciarbtn.after(1000, self.createColor)
 
     def gameover(self):
         #for boton in self.__listaBotones:            
@@ -82,7 +131,7 @@ class Aplicacion:
         self.__ventanaGameOver.geometry('350x175')
         self.__textoLoose = Label(self.__ventanaGameOver, text=f"\nGAME OVER")
         self.__textoLoose.pack(pady = 20, padx = 20)
-        points = Label(self.__ventanaGameOver, text=f"\nPuntaje: {self.__marcador}")
+        points = Label(self.__ventanaGameOver, text=f"\nPuntaje: {self.__puntaje}")
         points.pack(pady = 10, padx = 10)
         self.__Quitbtn = Button(self.__ventanaGameOver, command = quit, bg = "white", text = "Salir", font = ('Arial', 10))
         self.__Quitbtn.place(relx = 0.55, rely = 0.435, anchor = tk.W, relwidth = 0.2, relheight = 0.15)
@@ -93,54 +142,5 @@ class Aplicacion:
         self.__jinicial == False
         self.__ventanaGameOver.destroy()
         self.__Iniciarbtn.after(1000, self.iniciar)
-
-    def iniciar(self):
-        self.__contador = 0
-        self.__puntaje = 0
-        self.__secuencia = []
-        self.__jinicial = True
-        self.__texto.config(text = "Puntaje                         " + str(self.__puntaje), font = ('Arial', 15))
-        self.__Iniciarbtn.destroy()
-        self.createColor()
-
-    def checkeaTurno(self):
-        if len(self.__secuencia) == self.__contador:
-            self.__contador = 0
-            self.__puntaje += 1
-            self.__Iniciarbtn.after(1000, self.createColor)
-
-    def createColor(self):
-        if self.__jinicial == True:
-            i = 0
-            while i < len(self.__secuencia):
-                messagebox.showinfo("damn","funca el while")
-                if self.__secuencia[i] == "Verde":
-                    self.cambioColor(self.__Verdebtn, "#00DD00")
-                if self.__secuencia[i] == "Amarillo":
-                    self.cambioColor(self.__Amarillobtn, "#FFFF00")
-                if self.__secuencia[i] == "Rojo":
-                    self.cambioColor(self.__Rojobtn, "#FF0000")
-                if self.__secuencia[i] == "Azul":
-                    self.cambioColor(self.__Azulbtn, "#0000FF")
-                i += 1
-                time.sleep(0.1)
-            xnum = random.randrange(0,4)
-            self.__secuencia.append(self.__colours[xnum])
-            if self.__secuencia[i] == "Verde":
-                self.cambioColor(self.__Verdebtn, "pink", "#00DD00")
-            if self.__secuencia[i] == "Amarillo":
-                self.cambioColor(self.__Amarillobtn, "pink", "#FFFF00")
-            if self.__secuencia[i] == "Rojo":
-                self.cambioColor(self.__Rojobtn, "pink", "#FF0000")
-            if self.__secuencia[i] == "Azul":
-                self.cambioColor(self.__Azulbtn, "pink", "#0000FF")
-            messagebox.showinfo("damn","a")
-
-    def cambioColor(self, xboton, xcolorCamb, xcolorInic):
-        xboton.configure(bg = xcolorCamb)
-        self.__ventana.update()
-        time.sleep(0.1)
-        xboton.configure(bg = xcolorInic)
-        self.__ventana.update()
 
 obj = Aplicacion()
