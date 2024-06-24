@@ -15,10 +15,8 @@ class Aplicacion:
     __ventanaUser: object
     __secuencia: list
     __puntaje = int
-    __mayorPtn: int
     __contador: int
     __jinicial: bool
-    # __listaBotones: list
     __colours: list
     __Verdebtn: object
     __Amarillobtn: object
@@ -44,10 +42,8 @@ class Aplicacion:
         self.__ventanaUser.geometry('350x150')
         self.__secuencia = []
         self.__puntaje = 0
-        self.__mayorPtn = 0
         self.__contador = 0
         self.__jinicial = False
-        #self.__listaBotones = [self.__Verdebtn, self.__Amarillobtn, self.__Rojobtn, self.__Azulbtn]
         self.__colours = ["Verde", "Amarillo", "Rojo", "Azul"]
         self.__ventana.title("Py-SimonGame")
         self.__ventana.geometry("350x550")
@@ -75,7 +71,7 @@ class Aplicacion:
         if xuser:
             self.__Username = xuser
             self.__ventanaUser.destroy()
-            self.__texto = Label(self.__ventana, text = str(self.__Username) + "                0", font = ('Arial', 15))
+            self.__texto = Label(self.__ventana, text = str(self.__Username) + "                " + str(self.__puntaje), font = ('Arial', 15))
             self.__texto.place(relx= 0.5, rely = 0.01,anchor = tk.N)
             self.LauncherBotones()
             self.__ventana.mainloop()
@@ -139,40 +135,47 @@ class Aplicacion:
         self.createColor()
 
     def createColor(self):
-        if self.__jinicial == True:
-            i = 0
-            while i < len(self.__secuencia):
-                messagebox.showinfo("opa","funca el while")
-                if self.__secuencia[i] == "Verde":
-                    self.cambioColor(self.__Verdebtn, "pink", "#00DD00")
-                elif self.__secuencia[i] == "Amarillo":
-                    self.cambioColor(self.__Amarillobtn, "pink", "#FFFF00")
-                elif self.__secuencia[i] == "Rojo":
-                    self.cambioColor(self.__Rojobtn, "pink", "#FF0000")
-                elif self.__secuencia[i] == "Azul":
-                    self.cambioColor(self.__Azulbtn, "pink", "#0000FF")
-                i += 1
-                time.sleep(0.1)
-            xnum = random.randrange(0,4)
-            self.__secuencia.append(self.__colours[xnum])
-            if self.__secuencia[i] == "Verde":
+        if self.__jinicial:
+            self.recorreSecuencia(0)
+
+    def recorreSecuencia(self, indice):
+        if indice < len(self.__secuencia):
+            color = self.__secuencia[indice]
+            if color == "Verde":
                 self.cambioColor(self.__Verdebtn, "pink", "#00DD00")
-            elif self.__secuencia[i] == "Amarillo":
+            elif color == "Amarillo":
                 self.cambioColor(self.__Amarillobtn, "pink", "#FFFF00")
-            elif self.__secuencia[i] == "Rojo":
+            elif color == "Rojo":
                 self.cambioColor(self.__Rojobtn, "pink", "#FF0000")
-            elif self.__secuencia[i] == "Azul":
+            elif color == "Azul":
                 self.cambioColor(self.__Azulbtn, "pink", "#0000FF")
+            self.__ventana.after(800, self.recorreSecuencia, indice + 1)
+        else:
+            self.agregaColor()
+
+    def agregaColor(self):
+        xnum = random.randrange(0, 4)
+        self.__secuencia.append(self.__colours[xnum])
+        color = self.__secuencia[-1]
+        if color == "Verde":
+            self.cambioColor(self.__Verdebtn, "pink", "#00DD00")
+        elif color == "Amarillo":
+            self.cambioColor(self.__Amarillobtn, "pink", "#FFFF00")
+        elif color == "Rojo":
+            self.cambioColor(self.__Rojobtn, "pink", "#FF0000")
+        elif color == "Azul":
+            self.cambioColor(self.__Azulbtn, "pink", "#0000FF")
 
     def cambioColor(self, xboton, xcolorCamb, xcolorInic):
-        xboton.configure(bg = xcolorCamb)
-        xboton.after(500, partial(xboton.configure, bg = xcolorInic))
+        xboton.configure(bg=xcolorCamb)
+        self.__ventana.after(500, lambda: xboton.configure(bg=xcolorInic))
+
 
     def press(self, xcolorPresionado):
-        if self.__jinicial == True:     # verifica que el juego inició
+        if self.__jinicial == True:
             if len(self.__secuencia) >= self.__contador - 1:     # el contador va una posicion adelantada
                 if self.__secuencia[self.__contador] == xcolorPresionado:
-                    self.__puntaje +=  1
+                    self.__contador +=  1
                     self.checkeaTurno()
                     self.__texto.config(text = str(self.__Username) + "              " + str(self.__puntaje), font = ('Arial', 15))
                 else:
@@ -185,14 +188,11 @@ class Aplicacion:
             self.__puntaje += 1
             self.__Iniciarbtn.after(1000, self.createColor)
 
-    def gameover(self):
-        #for boton in self.__listaBotones:            
+    def gameover(self):          
         self.__Verdebtn.unbind("<Button-1>")
-        self.__Amarillobtn.unbind("<Button-1>")         # todos los botones se desvinculan del evento Click para que dejen de sumar después de haber perdido
+        self.__Amarillobtn.unbind("<Button-1>")
         self.__Rojobtn.unbind("<Button-1>")
         self.__Azulbtn.unbind("<Button-1>")
-        if self.__puntaje > self.__mayorPtn:          # si hace récord se actualiza
-            self.__mayorPtn = self.__puntaje
         self.__texto.config(text = str(self.__Username) + "              " + str(self.__puntaje), font = ('Arial', 15))
         self.__ventanaGameOver = Toplevel(self.__ventana)
         self.__ventanaGameOver.title("Py-SimonGame")
