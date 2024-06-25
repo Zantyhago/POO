@@ -47,15 +47,13 @@ class Aplicacion:
         self.__colours = ["Verde", "Amarillo", "Rojo", "Azul"]
         self.__ventana.title("Py-SimonGame")
         self.__ventana.geometry("350x550")
-# iteracion 3
-        self.__barraMenu = Menu(self.__ventana)                 # se crea la barra menu de la ventana
-        MenuArchivo = Menu(self.__barraMenu, tearoff = 0)      # se crea un menú desplegable (drop-down menu)
+        self.__barraMenu = Menu(self.__ventana)
+        MenuArchivo = Menu(self.__barraMenu, tearoff = 0)
         self.__barraMenu.add_cascade(label = "Puntajes", menu = MenuArchivo)
         MenuArchivo.add_command(label = "Ver puntajes", command = self.mostrarPuntajes)
         MenuArchivo.add_separator()
         MenuArchivo.add_command(label = "Salir", command = self.__ventana.quit)
         self.__ventana.config(menu = self.__barraMenu)
-# iteracion 2
         self.__labelUsertxt = tk.Label(self.__ventanaUser, text= 'Datos del Jugador', font = ('Arial', 12))
         self.__labelUsertxt.grid(row = 0, column=0, sticky='w', ipadx = 2, ipady = 2, padx = 5, pady = 5)
         self.__labelUser = tk.Label(self.__ventanaUser, text= 'Jugador', font = ('Arial', 12))
@@ -173,7 +171,7 @@ class Aplicacion:
 
     def press(self, xcolorPresionado):
         if self.__jinicial == True:
-            if len(self.__secuencia) >= self.__contador - 1:     # el contador va una posicion adelantada
+            if len(self.__secuencia) >= self.__contador - 1:
                 if self.__secuencia[self.__contador] == xcolorPresionado:
                     self.__contador +=  1
                     self.checkeaTurno()
