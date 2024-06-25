@@ -14,7 +14,7 @@ class Aplicacion:
     __ventanaGameOver: object
     __ventanaUser: object
     __secuencia: list
-    __puntaje = int
+    __puntaje: int
     __contador: int
     __jinicial: bool
     __colours: list
