@@ -13,7 +13,7 @@ class GestorVehiculo:
 
     def leeDatos(self):
         try:
-            archivo = open('C:\\Users\\Vaf_Tecnology\\Desktop\\Santy\\Programación Orientada a Objetos\\Unidad 3\\Parcial 2\\Tema 2\Vehiculos.csv')
+            archivo = open('Vehiculos.csv')
             reader = csv.reader(archivo, delimiter = ';')
             bandera = True
             for fila in reader:
