@@ -1,4 +1,6 @@
-class Refrigerado:
+from classProducto import Producto
+
+class Refrigerado (Producto):
     __CodigoSuperv: str
 
     def __init__(self, xnom, xfechaE, xfechaV, xtemp, xpais, xnum, xcostoB, xcodigo):

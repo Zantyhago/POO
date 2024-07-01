@@ -1,4 +1,6 @@
-class Congelado:
+from classProducto import Producto
+
+class Congelado(Producto):
     __PorcN: float
     __PorcO: float
     __PorcCO: float
@@ -6,7 +8,8 @@ class Congelado:
     __MetodoPechi: str
 
     def __init__(self, xnom, xfechaE, xfechaV, xtemp, xpais, xnum, xcostoB, xporN, xporO, xporcCO, xporcVap, xmetodo):
-        super().__init__( xnom, xfechaE, xfechaV, xtemp, xpais, xnum, xcostoB)
+        super().__init__(xnom, xfechaE, xfechaV, xtemp, xpais, xnum, xcostoB)
+        # nom, xfechaE, xfechaV, xtemp, xpais, xnum, xcostoB
         self.__PorcN = xporN
         self.__PorcO = xporO
         self.__PorcCO = xporcCO

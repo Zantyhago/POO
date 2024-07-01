@@ -39,8 +39,15 @@ class Producto:
     def getCostoBase(self):
         return self.__costoBase
     
+    def __str__(self):
+        return f"""
+Nombre del producto: {self.__NombreProd}
+Pais de origen: {self.__pais}
+Temperatura de mant. recomendada: {self.__tempRecom}
+Importe de venta: {self.getImporte()}"""
+
     @abc.abstractmethod
-    def getnoseque(self):
+    def getImporte(self):
         pass
 
     
