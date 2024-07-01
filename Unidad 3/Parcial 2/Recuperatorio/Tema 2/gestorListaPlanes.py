@@ -41,7 +41,7 @@ class GestorPlan:
 
     def leerDatos(self):
         try:
-            archivo = open('C:\\Users\\Vaf_Tecnology\\Desktop\\Santy\\Programación Orientada a Objetos\\Unidad 3\\Parcial 2\\Recuperatorio\planes.csv')
+            archivo = open('planes.csv')
             reader = bokita_lo_mejor_que_hay.reader(archivo, delimiter = ';')
             bandera = True            
             for fila in reader:
