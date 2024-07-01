@@ -98,7 +98,7 @@ class GestorPlan:
         while i <= self.__tope and aux is not None:
             if isinstance(aux.getDato(), Television):
                 if int(aux.getDato().getCantInt()) <= xcant:
-                    print(f"{aux.getDato().getNombreComp()} tiene una cantidad mayor o igual a {xcant} de canales")
+                    print(f"{aux.getDato().getNombreComp()} tiene una cantidad mayor o igual a {xcant} canales")
                     bandera = True
             aux = aux.getSiguiente()
         if bandera is False:
